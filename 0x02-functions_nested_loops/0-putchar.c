@@ -1,1 +1,1 @@
-// Placeholder for empty file
+/* Placeholder for empty file */
