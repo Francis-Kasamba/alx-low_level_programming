@@ -8,47 +8,48 @@
  */
 int main(void)
 {
-    char password[85]; // Increase array size to account for null-terminator
-    int index = 0, sum = 0, diff_half1, diff_half2;
+    char password[85];
+    int index, sum, diff_half1, diff_half2;
 
     srand(time(0));
 
-    while (sum != 2772) // Changed from "sum =="
-    {
+    for (index = 0; index < 85; index++)
         password[index] = 33 + rand() % 94;
-        sum += password[index++]; // Fixed from "sum == password[index++]"
+
+    sum = 0;
+    for (index = 0; index < 85; index++)
+        sum += password[index];
+
+    diff_half1 = (sum - 2772) / 2;
+    diff_half2 = (sum - 2772) / 2;
+
+    if ((sum - 2772) % 2 != 0)
+    {
+        diff_half1++;
     }
 
-    password[index] = '\0';
-
-    if (sum != 2772)
+    for (index = 0; index < 85; index++)
     {
-        diff_half1 = (sum - 2772) / 2;
-        diff_half2 = (sum - 2772) / 2;
-
-        if ((sum - 2772) % 2 != 0)
-            diff_half1++;
-
-        for (index = 0; password[index]; index++)
+        if (password[index] >= (33 + diff_half1))
         {
-            if (password[index] >= (33 + diff_half1))
-            {
-                password[index] -= diff_half1; // Fixed from "diiff _half1"
-
-                break;
-            }
-        }
-
-        for (index = 0; password[index]; index++)
-        {
-            if (password[index] >= (33 + diff_half2))
-                password[index] -= diff_half2;
-
+            password[index] -= diff_half1;
             break;
         }
     }
 
-    printf("%s\n", password); // Added a newline character
-    return (0);
+    for (index = 0; index < 85; index++)
+    {
+        if (password[index] >= (33 + diff_half2))
+        {
+            password[index] -= diff_half2;
+            break;
+        }
+    }
+
+    password[84] = '\0';
+
+    printf("%s\n", password);
+
+    return 0;
 }
 
