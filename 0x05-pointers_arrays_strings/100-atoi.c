@@ -33,6 +33,6 @@ c++;
 }
 ni *= min;  /* Apply the sign to the final result */
 
-return ni;  /* Return the converted integer */
+return (ni);  /* Return the converted integer */
 }
 
