@@ -1,25 +1,2 @@
 #!/bin/bash
-
-# Check if the CFILE variable is set
-if [ -z "$CFILE" ]; then
-    echo "Please set the CFILE variable with the name of the C file."
-    exit 1
-fi
-
-# Check if the C file exists
-if [ ! -f "$CFILE" ]; then
-    echo "The C file $CFILE does not exist."
-    exit 1
-fi
-
-# Generate the assembly code with Intel syntax and save it as .s file
 gcc -S -masm=intel "$CFILE" -o "${CFILE%.c}.s"
-
-# Check if the assembly code was generated successfully
-if [ $? -eq 0 ]; then
-    echo "Assembly code generated successfully and saved as ${CFILE%.c}.s"
-else
-    echo "Failed to generate assembly code."
-    exit 1
-fi
-
