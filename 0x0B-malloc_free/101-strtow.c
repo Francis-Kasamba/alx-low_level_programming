@@ -27,32 +27,8 @@ int count_word(char *s)
 
 	return (w);
 }
-
 /**
- * create_word - creates a word from a given string
- * @start: start index of the word
- * @end: end index of the word
- * @str: input string
- *
- * Return: pointer to the created word
- */
-char *create_word(int start, int end, char *str)
-{
-	int len = end - start;
-	char *word = malloc(sizeof(char) * (len + 1));
-
-	if (word == NULL)
-		return (NULL);
-
-	for (int i = 0; i < len; i++)
-		word[i] = str[start++];
-
-	word[len] = '\0';
-	return (word);
-}
-
-/**
- * strtow - splits a string into words
+ * **strtow - splits a string into words
  * @str: string to split
  *
  * Return: pointer to an array of strings (Success)
@@ -65,14 +41,11 @@ char **strtow(char *str)
 
 	while (*(str + len))
 		len++;
-
 	words = count_word(str);
-
 	if (words == 0)
 		return (NULL);
 
-	matrix = malloc(sizeof(char *) * (words + 1));
-
+	matrix = (char **) malloc(sizeof(char *) * (words + 1));
 	if (matrix == NULL)
 		return (NULL);
 
@@ -83,12 +56,14 @@ char **strtow(char *str)
 			if (c)
 			{
 				end = i;
-				tmp = create_word(start, end, str);
-
+				tmp = (char *) malloc(sizeof(char) * (c + 1));
 				if (tmp == NULL)
 					return (NULL);
-
-				matrix[k++] = tmp;
+				while (start < end)
+					*tmp++ = str[start++];
+				*tmp = '\0';
+				matrix[k] = tmp - c;
+				k++;
 				c = 0;
 			}
 		}
