@@ -6,6 +6,11 @@ void _print(char *str, int l);
 char *mul(char n, char *num, int num_index, char *dest, int dest_index);
 int check_for_digits(char **av);
 void init(char *str, int l);
+int _putchar(char c);
+void print_result(char *result);
+int is_digit(char *str);
+char *multiply(char *num1, char *num2);
+
 #include <stdio.h>
 #include <stdlib.h>
 int _putchar(char c);
