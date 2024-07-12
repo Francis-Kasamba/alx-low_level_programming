@@ -2,24 +2,31 @@
 #include <stdlib.h>
 
 /**
- * main - program that multiplies two numbers.
- * @argc: number of arguments
- * @argv: array with the arguments
- *
- * Return: always 0
- **/
+*main - adds positive numbers
+*@argc: number of arguments
+*@argv: array of arguments
+*Return: 0 on success, 1 on failure
+*/
 
 int main(int argc, char *argv[])
 {
-	int mult = 0;
-	char c[] = "Error";
+	int i, j, sum = 0;
 
-	if (argc != 3)
+	for (i = 1; i < argc; i++)
 	{
-		printf("%s\n", c);
-		return (1);
+		for (j = 0; argv[i][j] != '\0'; j++)
+		{
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+			{
+				printf("Error\n");
+				return (1);
+			}
+		}
+
+		sum += atoi(argv[i]);
 	}
-	mult = atoi(argv[1]) * atoi(argv[2]);
-	printf("%i\n", mult);
+
+	printf("%d\n", sum);
+
 	return (0);
 }
